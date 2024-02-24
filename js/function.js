@@ -25,7 +25,23 @@ const getNumberFromString = (string = 'a') => {
   return parseInt(NumberFromString, 10);
 };
 
-const extractNumber = (string = '') => parseInt(string.replaceAll
-  (/\D/g, ''),10);
+const extractNumber = (string = '') => parseInt(string.replaceAll(/\D/g, ''), 10);
+
+const getRandomChar = (string) =>string[Math.round(Math.random() * (string.length - 1))];
+
+const makeRandomString = (string, length) => {
+  let RandomString = '';
+  while(RandomString.length < Math.floor(length)) {
+    RandomString += getRandomChar(string);
+  }
+  return RandomString;
+};
+
+checkLength('RandomString', 17);
+checkPalindrome('Дорога за город');
+isPalindrome('Я ем змея');
+getNumberFromString('ds9vcvl3;,.na5');
+extractNumber('adfasdf56<>sv78adf');
+makeRandomString('vcke', 7);
 
 
