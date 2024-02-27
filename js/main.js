@@ -28,9 +28,19 @@ const LANDSCAPES = [
   'Мальдивы — тысячи райских островов в бирюзовых водах Индийского океана.',
   'Бадаб-е-Сурт — природное чудо на севере Ирана.'
 ];
-
-const differentRandomObjects = Array.from({length: 25}, createPhotographsPosted);
-debugger
+const NUMBER_PHOTO_POSTS = 25;
+const likes = {
+  MIN: 15,
+  MAX: 200
+};
+const comments = {
+  MIN: 0,
+  MAX: 30
+};
+const avatar = {
+  MIN: 1,
+  MAX: 6
+};
 
 const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
@@ -39,35 +49,97 @@ const getRandomInteger = (a, b) => {
   return Math.floor(result);
 };
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
-const createId = (Array) => Array.length ? Array.length : 0;
-const createRandomId = () => Math.random().toString(16).slice(2);
 
-function createPhotographsPosted(){
-  return { id: createId(differentRandomObjects),
-    url: `photos/ ${this.id}`,
-    description: 'Пейзажи',
-    likes: getRandomInteger(1,200),
-    comments: 'fghfghfgh' //Array.from({length: getRandomInteger(0, 35)}, createComments)
+const initId = () => {
+  let id = 0;
+  return function () {
+    id++;
+    return id;
   };
-}
-console.log(createPhotographsPosted);
-console.log(createId(NAMES));
+};
+const getCommentId = initId();
+const getPhotoId = initId();
+
+const createComments = () =>{ 
+  const idnumber = getCommentId();
+  return {
+    id: idnumber,
+    avatar: `img/avatar-${getRandomInteger(avatar.MIN, avatar.MAX)}.svg`,
+    message: getRandomArrayElement(RANDOMMESSAGE),
+    name: getRandomArrayElement(NAMES)
+  };
+};
+const createPhotoPosted = () => {
+  const idnumber = getPhotoId();
+  return{ id: idnumber,
+    url: `photos/${idnumber}.jpg`,
+    description: getRandomArrayElement(LANDSCAPES),
+    likes: getRandomInteger(likes.MIN, likes.MAX),
+    comments: Array.from({length: getRandomInteger(comments.MIN, comments.MAX)}, createComments)
+  };
+};
+const PhotoPosts = Array.from({
+  length: NUMBER_PHOTO_POSTS
+}, createPhotoPosted);
 debugger;
 
-// const createComments = () =>({
-//   id: 135,
-//   avatar: `img/avatar-${id}.svg`,
-//   message: getRandomArrayElement(RANDOMMESSAGE),
-//   name: getRandomArrayElement(NAMES),
-// });
+// создание новых групп Id
 
-// const createPhotographsPosted = () => ({
-//   id: createId(differentRandomObjects),
-//   url: `photos/ ${this.id}`,
-//   description: 'Пейзажи',
-//   likes: getRandomInteger(1,200),
-//   comments: 'fghfghfgh' //Array.from({length: getRandomInteger(0, 35)}, createComments)
-// });
+
+// const createId = (Array) => Array.length ? Array.length : 0;
+// const createRandomId = () => Math.round(Math.random() * 25);
+
+
+// const createPhotoPosted = () => {
+//   let id = 1;
+
+//   return () =>
+//   {
+//     const photo = {};
+//     photo.id = id;
+//     photo.url = 'photos/.jpg';
+//     photo.description = getRandomArrayElement(LANDSCAPES);
+//     photo.likes = getRandomInteger(1, 200);
+//     photo.comments = 'fghfghfgh'; //Array.from({length: getRandomInteger(0, 35)}, createComments);
+//     id++;
+//     return photo;
+//   };
+// };
+
+
+// console.log(createPhotoPosted());
+// const counter = () =>{
+//   let id = 0;
+//   return function (){
+//     return ++id;
+//   };
+// };
+// function createCounter() {
+//   let counter = 0;
+//   const myFunction = function() {
+//     return ++counter;
+//   };
+//   return myFunction;
+// }
+
+// const createPhotoPosted = () => {
+//   let idnumber = 0;
+//   return function () => {
+//     const createIdnumber = () => ++idnumber;
+//     const photo = {
+//       id: createIdnumber(),
+//       url: 'photos/dfd.jpg',
+//       description: getRandomArrayElement(LANDSCAPES),
+//       likes: getRandomInteger(1, 200),
+//       comments: 'fghfghfgh' //Array.from({length: getRandomInteger(0, 35)}, createComments)
+//     };
+//     return photo;
+//   }
+// };
+
+
+// console.log(createId(NAMES));
+
 
 // В файле main.js напишите необходимые функции для создания массива из 25 сгенерированных объектов. Каждый объект массива — описание фотографии, опубликованной пользователем.
 // Структура каждого объекта должна быть следующей:
