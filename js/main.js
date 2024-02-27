@@ -60,8 +60,9 @@ const initId = () => {
 const getCommentId = initId();
 const getPhotoId = initId();
 
-const createComments = () =>{ 
-  const idnumber = getCommentId();
+const createComments = (_, index) =>{
+//   const idnumber = getCommentId();
+  const idnumber = index+1;
   return {
     id: idnumber,
     avatar: `img/avatar-${getRandomInteger(avatar.MIN, avatar.MAX)}.svg`,
@@ -69,19 +70,42 @@ const createComments = () =>{
     name: getRandomArrayElement(NAMES)
   };
 };
-const createPhotoPosted = () => {
-  const idnumber = getPhotoId();
-  return{ id: idnumber,
-    url: `photos/${idnumber}.jpg`,
+const createPhotoPosted = (_, index) =>
+//   const idnumber = getPhotoId();
+  ({ id: index + 1,
+    url: `photos/${index + 1}.jpg`,
     description: getRandomArrayElement(LANDSCAPES),
     likes: getRandomInteger(likes.MIN, likes.MAX),
     comments: Array.from({length: getRandomInteger(comments.MIN, comments.MAX)}, createComments)
-  };
-};
+  });
 const PhotoPosts = Array.from({
   length: NUMBER_PHOTO_POSTS
 }, createPhotoPosted);
 debugger;
+
+
+// const createComments = () =>{
+//     const idnumber = getCommentId();
+//     return {
+//       id: idnumber,
+//       avatar: `img/avatar-${getRandomInteger(avatar.MIN, avatar.MAX)}.svg`,
+//       message: getRandomArrayElement(RANDOMMESSAGE),
+//       name: getRandomArrayElement(NAMES)
+//     };
+//   };
+//   const createPhotoPosted = () => {
+//     const idnumber = getPhotoId();
+//     return{ id: idnumber,
+//       url: `photos/${idnumber}.jpg`,
+//       description: getRandomArrayElement(LANDSCAPES),
+//       likes: getRandomInteger(likes.MIN, likes.MAX),
+//       comments: Array.from({length: getRandomInteger(comments.MIN, comments.MAX)}, createComments)
+//     };
+//   };
+//   const PhotoPosts = Array.from({
+//     length: NUMBER_PHOTO_POSTS
+//   }, createPhotoPosted);
+//   debugger;
 
 // создание новых групп Id
 
