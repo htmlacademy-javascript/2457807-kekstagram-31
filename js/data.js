@@ -56,13 +56,14 @@ const createComments = (_, index) =>{
   };
 };
 const createPhotoPosted = (_, index) =>{
- let idnumber = getPhotoId();
- return ({ id: idnumber,
+  const idnumber = getPhotoId();
+  return ({ id: idnumber,
     url: `photos/${idnumber}.jpg`,
     description: getRandomArrayElement(LANDSCAPES),
     likes: getRandomInteger(likes.MIN, likes.MAX),
     comments: Array.from({length: getRandomInteger(comments.MIN, comments.MAX)}, createComments)
-  })};
+  });
+};
 const photoPosts = Array.from({
   length: NUMBER_PHOTO_POSTS
 }, createPhotoPosted);
