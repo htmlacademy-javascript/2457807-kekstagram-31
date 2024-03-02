@@ -1,5 +1,3 @@
-const checkLength = (string = '', maxSymbols = 1) => string.length <= maxSymbols;
-
 const checkPalindrome = (string = '') => {
   const normalizedString = string.replaceAll(' ', '').toUpperCase();
   for (let i = 0; i < normalizedString.length; i++) {
@@ -36,12 +34,19 @@ const makeRandomString = (string, length) => {
   }
   return RandomString;
 };
+function createRandomIdFromRangeGenerator (min, max) {
+  const previousValues = [];
 
-checkLength('RandomString', 17);
-checkPalindrome('Дорога за город');
-isPalindrome('Я ем змея');
-getNumberFromString('ds9vcvl3;,.na5');
-extractNumber('adfasdf56<>sv78adf');
-makeRandomString('vcke', 7);
-
-
+  return function () {
+    let currentValue = getRandomInteger(min, max);
+    if (previousValues.length >= (max - min + 1)) {
+      console.error('Перебраны все числа из диапазона от ' + min + ' до ' + max);
+      return null;
+    }
+    while (previousValues.includes(currentValue)) {
+      currentValue = getRandomInteger(min, max);
+    }
+    previousValues.push(currentValue);
+    return currentValue;
+  };
+}
