@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const checkPalindrome = (string = '') => {
   const normalizedString = string.replaceAll(' ', '').toUpperCase();
   for (let i = 0; i < normalizedString.length; i++) {
@@ -62,21 +63,7 @@ const getMinutes = (string = '00:00') => {
   }
   return Number(string.split(':')[0]) * 60 + Number(string.split(':')[1]);
 };
-//  console.log(getMinutes('08:00'));
-
 const checkMeeting = (startWorkDay = '8:30', endWorkDay = '17:30', startMeeting = '0:0', timeMeeting = 0) => {
-  // console.log(getMinutes(startWorkDay));
-  // console.log(getMinutes(startMeeting));
-  // console.log(getMinutes(endWorkDay));
-  // console.log(getMinutes(startMeeting));
-  // console.log(Number(timeMeeting));
-  // console.log(getMinutes(startMeeting) + Number(timeMeeting));
-  // console.log(isNaN(getMinutes(startWorkDay)));
-  // console.log(isNaN(getMinutes(startMeeting)));
-  // console.log(isNaN(getMinutes(startWorkDay)));
-  // console.log(isNaN(getMinutes(endWorkDay)));
-  // console.log(isNaN(getMinutes(startMeeting)));
-  // console.log(isNaN(Number(timeMeeting)));
   if ((getMinutes(startWorkDay) === -1) || (getMinutes(startMeeting)===-1) || (getMinutes(endWorkDay)===-1) || (getMinutes(startMeeting)===-1) || isNaN(Number(timeMeeting))){
     return 'Неверный формат времени';
   }
@@ -89,12 +76,13 @@ const checkMeeting = (startWorkDay = '8:30', endWorkDay = '17:30', startMeeting 
   return false;
 };
 
-console.log(checkMeeting('08:00', '17:30', '14:00', '90')); // true
-console.log(checkMeeting('8:0', '10:0', '8:0', 120)); // true
-console.log(checkMeeting('08:00', '14:30', '14:00', 90)); // false
-console.log(checkMeeting('14:00', '17:30', '08:0', 90)); // false
-console.log(checkMeeting('8:00', '17:30', '08:00', 900)); // false
-console.log(checkMeeting('8:00', '-17:30', 'выа08:00', 900)); // false
-console.log(checkMeeting('-8:00', '17:30', '08:00', 900)); // false
-console.log(checkMeeting('8:0', '10:0', '8:0', -120)); // true
-debugger;
+// console.log(checkMeeting('08:00', '17:30', '14:00', '90')); // true
+// console.log(checkMeeting('8:0', '10:0', '8:0', 120)); // true
+// console.log(checkMeeting('08:00', '14:30', '14:00', 90)); // false
+// console.log(checkMeeting('14:00', '17:30', '08:0', 90)); // false
+// console.log(checkMeeting('8:00', '17:30', '08:00', 900)); // false
+// console.log(checkMeeting('8:00', '-17:30', 'выа08:00', 900)); // false
+// console.log(checkMeeting('-8:00', '17:30', '08:00', 900)); // false
+// console.log(checkMeeting('8:0', '10:0', '8:0', -120)); // true
+// debugger;
+

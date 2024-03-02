@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import {getRandomArrayElement, getRandomInteger, initId} from './util.js';
 const RANDOMMESSAGE = [
   'Всё отлично!',
@@ -68,3 +69,4 @@ const photoPosts = Array.from({
   length: NUMBER_PHOTO_POSTS
 }, createPhotoPosted);
 export {photoPosts};
+

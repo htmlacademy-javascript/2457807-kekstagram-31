@@ -15,3 +15,4 @@ const initId = () => {
   };
 };
 export {getRandomInteger, getRandomArrayElement, initId};
+
