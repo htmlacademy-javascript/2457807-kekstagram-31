@@ -36,22 +36,22 @@ const makeRandomString = (string, length) => {
   return RandomString;
 };
 
-function createRandomIdFromRangeGenerator(min, max) {
-  const previousValues = [];
+// function createRandomIdFromRangeGenerator(min, max) {
+//   const previousValues = [];
 
-  return function () {
-    let currentValue = getRandomInteger(min, max);
-    if (previousValues.length >= (max - min + 1)) {
-      console.error(`Перебраны все числа из диапазона от ${ min } до ${ max}`);
-      return null;
-    }
-    while (previousValues.includes(currentValue)) {
-      currentValue = getRandomInteger(min, max);
-    }
-    previousValues.push(currentValue);
-    return currentValue;
-  };
-}
+//   return function () {
+//     let currentValue = getRandomInteger(min, max);
+//     if (previousValues.length >= (max - min + 1)) {
+//       console.error(`Перебраны все числа из диапазона от ${ min } до ${ max}`);
+//       return null;
+//     }
+//     while (previousValues.includes(currentValue)) {
+//       currentValue = getRandomInteger(min, max);
+//     }
+//     previousValues.push(currentValue);
+//     return currentValue;
+//   };
+// }
 
 const getMinutes = (string = '00:00') => {
   // console.log((Number(string.split(':')[0])));
@@ -64,10 +64,10 @@ const getMinutes = (string = '00:00') => {
   return Number(string.split(':')[0]) * 60 + Number(string.split(':')[1]);
 };
 const checkMeeting = (startWorkDay = '8:30', endWorkDay = '17:30', startMeeting = '0:0', timeMeeting = 0) => {
-  if ((getMinutes(startWorkDay) === -1) || (getMinutes(startMeeting)===-1) || (getMinutes(endWorkDay)===-1) || (getMinutes(startMeeting)===-1) || isNaN(Number(timeMeeting))){
+  if ((getMinutes(startWorkDay) === -1) || (getMinutes(startMeeting) === -1) || (getMinutes(endWorkDay) === -1) || (getMinutes(startMeeting) === -1) || isNaN(Number(timeMeeting))){
     return 'Неверный формат времени';
   }
-  if ((getMinutes(startWorkDay) === -2) || (getMinutes(startMeeting) === -2) || (getMinutes(endWorkDay) === -2) || (getMinutes(startMeeting) === -2) || Number(timeMeeting)<=0){
+  if ((getMinutes(startWorkDay) === -2) || (getMinutes(startMeeting) === -2) || (getMinutes(endWorkDay) === -2) || (getMinutes(startMeeting) === -2) || Number(timeMeeting) <= 0){
     return 'Время не может быть отрицательным';
   }
   if (getMinutes(startWorkDay) <= getMinutes(startMeeting) && (getMinutes(endWorkDay)) >= (getMinutes(startMeeting) + Number(timeMeeting))) {
@@ -76,7 +76,7 @@ const checkMeeting = (startWorkDay = '8:30', endWorkDay = '17:30', startMeeting 
   return false;
 };
 
- //console.log(checkMeeting('08:00', '17:30', '14:00', '90')); // true
+//console.log(checkMeeting('08:00', '17:30', '14:00', '90')); // true
 // console.log(checkMeeting('8:0', '10:0', '8:0', 120)); // true
 // console.log(checkMeeting('08:00', '14:30', '14:00', 90)); // false
 // console.log(checkMeeting('14:00', '17:30', '08:0', 90)); // false
