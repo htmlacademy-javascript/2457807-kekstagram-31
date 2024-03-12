@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import {photoPosts} from './data.js';
 import './util.js';
-import './thumbnails.js';
+import './usersphoto.js';
 console.log(photoPosts);
 
 
