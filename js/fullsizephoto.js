@@ -8,16 +8,26 @@ const commentTotalCount = userPictureOpen.querySelector('.social__comment-total-
 const socialCaption = userPictureOpen.querySelector('.social__caption');
 
 usersPictureList.addEventListener('click', (evt) =>{
-//   if (evt.target.classList.value === 'picture__img'){
-//   for(let i = 0; i < usersPictureList; i++){
-//     if(usersPictureList[i].url === evt.target.src){
-//  const selectedPicture = usersPictureList[i];
-//     }
-//   }
-  urlPicture.src = evt.target.src;
-  socialCaption.textContent = evt.target.alt;
-  likesCountPicture.textContent = evt.target.nextElementSibling.children[1].textContent;
-  commentTotalCount.textContent = evt.target.nextElementSibling.children[0].textContent;
+// получение id данных 1 способ: по порядковому номеру детей userPictureList с классом picture
+  let count = 0;
+  for(let i = 0; i < usersPictureList.children.length; i++){
+    if(usersPictureList.children[i].classList.value === 'picture') {
+      ++count;
+    }
+    if(usersPictureList.children[i] === evt.target.parentNode){
+      break;
+    }
+  }
+  //получение id данных 2 способ: по номеру картинки
+  //console.log(Number(evt.target.src.split('photos/')[1].replace(/[^ 0-9.]/g, '')));      // replace(/[^ 0-9.]/g, ''));
+  count = Number(evt.target.src.split('photos/')[1].replace(/[^ 0-9.]/g, ''));      // replace(/[^ 0-9.]/g, '')
+  urlPicture.src = usersPhotoPosts[count - 1].url;
+  socialCaption.textContent = usersPhotoPosts[count - 1].alt;
+   likesCountPicture.textContent = usersPhotoPosts[count - 1].likes;;
+   commentTotalCount.textContent = usersPhotoPosts[count - 1].comments.length;
+
+  // likesCountPicture.textContent = evt.target.nextElementSibling.children[1].textContent;
+  // commentTotalCount.textContent = evt.target.nextElementSibling.children[0].textContent;
   userPictureOpen.classList.remove('hidden');
 //   }
 });
