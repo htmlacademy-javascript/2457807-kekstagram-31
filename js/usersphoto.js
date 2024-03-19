@@ -18,3 +18,5 @@ usersPhotoPosts.forEach((element) => {
 });
 
 usersPictureList.appendChild(photoPostListFragment);
+
+export {usersPhotoPosts, usersPictureList};
