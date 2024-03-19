@@ -17,20 +17,9 @@ const commentTemplate = document.querySelector('#comment')
   .content
   .querySelector('.social__comment');
 
-  const pictureCancel = userPictureOpen.querySelector('#picture-cancel');
+const pictureCancel = userPictureOpen.querySelector('#picture-cancel');
 
-  pictureCancel.addEventListener('click', ()=>{
-    userPictureOpen.classList.add('hidden');
-  })
-  const onDocumentKeydown = (evt) => {
-    if (isEscapeKey(evt)) {
-      evt.preventDefault();
-      
-    }
-  };
-
-
-usersPictureList.addEventListener('click', (evt) =>{
+function showBigPicture(evt){
 // получение id данных 1 способ: по порядковому номеру детей userPictureList с классом picture
   let count = 0;
   // for(let i = 0; i < usersPictureList.children.length; i++){
@@ -42,7 +31,7 @@ usersPictureList.addEventListener('click', (evt) =>{
   //   }
   // }
   //получение id данных 2 способ: по номеру картинки
-  //console.log(Number(evt.target.src.split('photos/')[1].replace(/[^ 0-9.]/g, '')));      // replace(/[^ 0-9.]/g, ''));
+  //console.log(Number(evt.target.src.split('photos/')[1].replace(/[^ 0-9.]/g, '')));
   count = Number(evt.target.src.split('photos/')[1].replace(/[^ 0-9.]/g, ''));
   urlPicture.src = usersPhotoPosts[count - 1].url;
   socialCaption.textContent = usersPhotoPosts[count - 1].alt;
@@ -62,10 +51,35 @@ usersPictureList.addEventListener('click', (evt) =>{
   commentsList.appendChild(commentsListFragment);
 
   commentCount.classList.add('hidden');
-   commentLoader.classList.add('hidden');
-   modalsOpen.classList.add('modal-open');
+  commentLoader.classList.add('hidden');
+  modalsOpen.classList.add('modal-open');
+};
 
+usersPictureList.addEventListener('click', (evt) => {
+  openUserModal(evt);
+});
+
+const onDocumentKeydown = (evt) => {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    closeUserModal ();
+  }
+};
+
+function openUserModal (evt) {
+  showBigPicture(evt);
   userPictureOpen.classList.remove('hidden');
+  document.addEventListener('keydown', onDocumentKeydown);
+}
+
+function closeUserModal () {
+  userPictureOpen.classList.add('hidden');
+  modalsOpen.classList.remove('modal-open');
+  document.removeEventListener('keydown', onDocumentKeydown);
+}
+
+pictureCancel.addEventListener('click', ()=>{
+  closeUserModal ();
 });
 
 
