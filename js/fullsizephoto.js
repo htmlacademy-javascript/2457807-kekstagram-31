@@ -56,13 +56,14 @@ const showBigPicture = (evt)=>{
   });
   commentsList.appendChild(commentsListFragment);
   // commentCount.classList.add('hidden');
-  // commentLoader.classList.add('hidden');
+  commentLoader.classList.remove('hidden');
   modalsOpen.classList.add('modal-open');
 };
 const showNextComments = ()=>{
   let count = Number(commentShownCount.textContent);
   for(let i = 1; i <= 5; i++){
     if(count === Number(commentTotalCount.textContent)) {
+      commentLoader.classList.add('hidden');
       break;
     }
     commentsList.children[count].classList.remove('hidden');
