@@ -3,6 +3,7 @@ import {photoPosts} from './data.js';
 import './util.js';
 import './usersphoto.js';
 import './fullsizephoto.js';
-console.log(photoPosts);
+import './user-modal.js';
+
 
 

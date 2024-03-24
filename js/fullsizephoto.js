@@ -11,8 +11,6 @@ const socialCaption = userPictureOpen.querySelector('.social__caption');
 const commentCount = userPictureOpen.querySelector('.social__comment-count');
 const commentLoader = userPictureOpen.querySelector('.comments-loader');
 
-const modalsOpen = document.querySelector('body');
-
 const commentsList = document.querySelector('.social__comments');
 const commentTemplate = document.querySelector('#comment')
   .content
@@ -57,7 +55,7 @@ const showBigPicture = (evt)=>{
   commentsList.appendChild(commentsListFragment);
   // commentCount.classList.add('hidden');
   commentLoader.classList.remove('hidden');
-  modalsOpen.classList.add('modal-open');
+  document.body.classList.add('modal-open');
 };
 const showNextComments = ()=>{
   let count = Number(commentShownCount.textContent);
@@ -92,7 +90,7 @@ const openBigPicture = (evt) => {
 
 const closeBigPicture = () => {
   userPictureOpen.classList.add('hidden');
-  modalsOpen.classList.remove('modal-open');
+  document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
   commentLoader.removeEventListener('click', showNextComments);
 };
