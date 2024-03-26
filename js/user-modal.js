@@ -1,3 +1,4 @@
+import {initScale, initSlider} from './image-editing2.js';
 import {
   isEscapeKey
 } from './util.js';
@@ -110,6 +111,8 @@ const openUploadForm = () => {
   document.body.classList.add('modal-open');
   imgUploadOverlay.classList.remove('hidden');
   document.addEventListener('keydown', onDocumentKeydown);
+  initScale();
+  initSlider();
 };
 
 const closeUploadForm = () => {
