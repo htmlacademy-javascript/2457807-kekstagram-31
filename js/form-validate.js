@@ -1,7 +1,5 @@
 import {initScale, initSlider} from './photo-editing.js';
-import {
-  isEscapeKey
-} from './util.js';
+import {isEscapeKey } from './util.js';
 
 const imgUploadForm = document.querySelector('.img-upload__form');
 const imgUploadInput = imgUploadForm.querySelector('.img-upload__input');
@@ -12,7 +10,7 @@ const hashtagInput = document.querySelector('.text__hashtags');
 const commentInput = document.querySelector('.text__description');
 const uploadSubmit = document.querySelector('.img-upload__submit');
 
-const MAXHASHTAGS = 5;
+const MAX_HASHTAGS = 5;
 
 const pristine = new Pristine(imgUploadForm, {
   classTo: 'img-upload__field-wrapper',
@@ -23,20 +21,6 @@ const pristine = new Pristine(imgUploadForm, {
 });
 const getNumberhashtags = (value) =>value.trim().toUpperCase().split(' ').filter((hashtag) => hashtag.trim() !== '');
 
-const validateFormatHashtags = (value) => {
-  const regularExpression = /^#[а-яА-ЯёЁa-zA-Z0-9]{1,19}$/i;
-  const hashtags = getNumberhashtags(value);
-  for (const hashtag of hashtags) {
-    if (!regularExpression.test(hashtag)) {
-      uploadSubmit.disabled = true;
-      return false;
-    }
-  }
-  if(validateUniqueHashtags && validateMaxNumberHashtags && validateCommentMaxSymbol) {
-    uploadSubmit.disabled = false;
-  }
-  return true;
-};
 const validateUniqueHashtags = (value) => {
   const hashtags = getNumberhashtags(value);
   const uniqueHashtags = new Set(hashtags);
@@ -48,7 +32,7 @@ const validateUniqueHashtags = (value) => {
 };
 const validateMaxNumberHashtags = (value) => {
   const hashtags = getNumberhashtags(value);
-  if (hashtags.length > MAXHASHTAGS) {
+  if (hashtags.length > MAX_HASHTAGS) {
     uploadSubmit.disabled = true;
     return false;
   }
@@ -66,7 +50,20 @@ const validateCommentMaxSymbol = (value) =>{
     return true;
   }
 };
-
+const validateFormatHashtags = (value) => {
+  const regularExpression = /^#[а-яА-ЯёЁa-zA-Z0-9]{1,19}$/i;
+  const hashtags = getNumberhashtags(value);
+  for (const hashtag of hashtags) {
+    if (!regularExpression.test(hashtag)) {
+      uploadSubmit.disabled = true;
+      return false;
+    }
+  }
+  if (validateUniqueHashtags && validateMaxNumberHashtags && validateCommentMaxSymbol) {
+    uploadSubmit.disabled = false;
+  }
+  return true;
+};
 
 pristine.addValidator(
   hashtagInput,
@@ -90,7 +87,6 @@ pristine.addValidator(
   'Комментарий не может содержать больше 140 символов!'
 );
 
-
 imgUploadForm.addEventListener('submit', (evt) => {
 //   evt.preventDefault();
 //   imgUploadForm.submit();
@@ -106,6 +102,7 @@ const onDocumentKeydown = (evt) => {
     closeUploadForm();
   }
 };
+
 const openUploadForm = () => {
   document.body.classList.add('modal-open');
   imgUploadOverlay.classList.remove('hidden');

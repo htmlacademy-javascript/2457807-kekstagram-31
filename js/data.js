@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import {getRandomArrayElement, getRandomInteger, initId} from './util.js';
-const RANDOMMESSAGE = [
+const RANDOM_MESSAGES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   ' Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -18,7 +18,7 @@ const NAMES = [
   'Люпита',
   'Вашингтон',
 ];
-const LANDSCAPES = [
+const PHOTO = [
   '«Волна» — скала из песчаника на границе штатов Аризона и Юта, США.',
   'Солончак Уюни — высохшее солёное озеро на юге пустынной равнины Альтиплано, Боливия.',
   'Гейзер Флай — искусственный гейзер, расположенный на северо-западе Невады.',
@@ -39,7 +39,7 @@ const comments = {
   MIN: 0,
   MAX: 30
 };
-const avatar = {
+const avatars = {
   MIN: 1,
   MAX: 6
 };
@@ -51,8 +51,8 @@ const createComments = (_, index) =>{
   //const idnumber = index + 1;
   return {
     id: idnumber,
-    avatar: `img/avatar-${getRandomInteger(avatar.MIN, avatar.MAX)}.svg`,
-    message: getRandomArrayElement(RANDOMMESSAGE),
+    avatars: `img/avatars-${getRandomInteger(avatars.MIN, avatars.MAX)}.svg`,
+    message: getRandomArrayElement(RANDOM_MESSAGES),
     name: getRandomArrayElement(NAMES)
   };
 };
@@ -60,7 +60,7 @@ const createPhotoPosted = (_, index) =>{
   const idnumber = getPhotoId();
   return ({ id: idnumber,
     url: `photos/${idnumber}.jpg`,
-    description: getRandomArrayElement(LANDSCAPES),
+    description: getRandomArrayElement(PHOTO),
     likes: getRandomInteger(likes.MIN, likes.MAX),
     comments: Array.from({length: getRandomInteger(comments.MIN, comments.MAX)}, createComments)
   });
