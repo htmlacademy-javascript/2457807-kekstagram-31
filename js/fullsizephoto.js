@@ -30,7 +30,7 @@ const showBigPicture = (evt)=>{
   //   }
   // }
   //получение id данных 2 способ: по номеру картинки
-  //console.log(Number(evt.target.src.split('photos/')[1].replace(/[^ 0-9.]/g, '')));
+  //console.log(Number(evt.target.src.split('photos/')[1].replace(/[^ 0-9.]/g, '')));  
   count = Number(evt.target.src.split('photos/')[1].replace(/[^ 0-9.]/g, ''));
   urlPicture.src = usersPhotoPosts[count - 1].url;
   socialCaption.textContent = usersPhotoPosts[count - 1].alt;
@@ -71,6 +71,7 @@ const showNextComments = ()=>{
 };
 
 usersPictureList.addEventListener('click', (evt) => {
+  if(evt.target.classList.value !== 'picture__img') return;
   openBigPicture(evt);
 });
 

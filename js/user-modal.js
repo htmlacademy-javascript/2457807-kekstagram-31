@@ -1,4 +1,4 @@
-import {initScale, initSlider} from './image-editing2.js';
+import {initScale, initSlider} from './photo-editing.js';
 import {
   isEscapeKey
 } from './util.js';
@@ -22,7 +22,6 @@ const pristine = new Pristine(imgUploadForm, {
   errorTextClass: 'img-upload__field-wrapper--error'
 });
 const getNumberhashtags = (value) =>value.trim().toUpperCase().split(' ').filter((hashtag) => hashtag.trim() !== '');
-
 
 const validateFormatHashtags = (value) => {
   const regularExpression = /^#[а-яА-ЯёЁa-zA-Z0-9]{1,19}$/i;
