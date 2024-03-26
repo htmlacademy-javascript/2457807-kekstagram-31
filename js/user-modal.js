@@ -1,3 +1,4 @@
+import {initScale, initSlider} from './photo-editing.js';
 import {
   isEscapeKey
 } from './util.js';
@@ -20,10 +21,11 @@ const pristine = new Pristine(imgUploadForm, {
   errorTextTag: 'div',
   errorTextClass: 'img-upload__field-wrapper--error'
 });
+const getNumberhashtags = (value) =>value.trim().toUpperCase().split(' ').filter((hashtag) => hashtag.trim() !== '');
 
 const validateFormatHashtags = (value) => {
   const regularExpression = /^#[а-яА-ЯёЁa-zA-Z0-9]{1,19}$/i;
-  const hashtags = value.trim().toUpperCase().split(' ').filter((hashtag) => hashtag.trim() !== '');
+  const hashtags = getNumberhashtags(value);
   for (const hashtag of hashtags) {
     if (!regularExpression.test(hashtag)) {
       uploadSubmit.disabled = true;
@@ -36,7 +38,7 @@ const validateFormatHashtags = (value) => {
   return true;
 };
 const validateUniqueHashtags = (value) => {
-  const hashtags = value.trim().toUpperCase().split(' ').filter((hashtag) => hashtag.trim() !== '');
+  const hashtags = getNumberhashtags(value);
   const uniqueHashtags = new Set(hashtags);
   if (hashtags.length !== uniqueHashtags.size) {
     uploadSubmit.disabled = true;
@@ -45,7 +47,7 @@ const validateUniqueHashtags = (value) => {
   return true;
 };
 const validateMaxNumberHashtags = (value) => {
-  const hashtags = value.trim().toUpperCase().split(' ').filter((hashtag) => hashtag.trim() !== '');
+  const hashtags = getNumberhashtags(value);
   if (hashtags.length > MAXHASHTAGS) {
     uploadSubmit.disabled = true;
     return false;
@@ -69,7 +71,7 @@ const validateCommentMaxSymbol = (value) =>{
 pristine.addValidator(
   hashtagInput,
   validateFormatHashtags,
-  'Неверный формат хэштега! (Начало с #. Разрешены: символы цифры. Максимум 20 символов!)'
+  'Неверный формат хэштега! (Начало с #. Разрешены: символы латинские и кириллица, цифры. Максимум 20 символов!)'
 );
 pristine.addValidator(
   hashtagInput,
@@ -107,7 +109,9 @@ const onDocumentKeydown = (evt) => {
 const openUploadForm = () => {
   document.body.classList.add('modal-open');
   imgUploadOverlay.classList.remove('hidden');
-  document.addEventListener('keydown', onDocumentKeydown); 
+  document.addEventListener('keydown', onDocumentKeydown);
+  initScale();
+  initSlider();
 };
 
 const closeUploadForm = () => {
