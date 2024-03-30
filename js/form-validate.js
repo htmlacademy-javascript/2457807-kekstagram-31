@@ -1,5 +1,8 @@
 import {initScale, initSlider} from './photo-editing.js';
-import {isEscapeKey } from './util.js';
+import {isEscapeKey, showMessage } from './util.js';
+import { sendData } from './api.js';
+const MAX_HASHTAGS = 5;
+
 
 const imgUploadForm = document.querySelector('.img-upload__form');
 const imgUploadInput = imgUploadForm.querySelector('.img-upload__input');
@@ -10,7 +13,8 @@ const hashtagInput = document.querySelector('.text__hashtags');
 const commentInput = document.querySelector('.text__description');
 const uploadSubmit = document.querySelector('.img-upload__submit');
 
-const MAX_HASHTAGS = 5;
+const imgUploadPreview = document.querySelector('.img-upload__preview').children[0];
+
 
 const pristine = new Pristine(imgUploadForm, {
   classTo: 'img-upload__field-wrapper',
@@ -87,11 +91,30 @@ pristine.addValidator(
   'Комментарий не может содержать больше 140 символов!'
 );
 
-imgUploadForm.addEventListener('submit', (evt) => {
-//   evt.preventDefault();
-//   imgUploadForm.submit();
-  pristine.validate();
-});
+const setUserFormSubmit = (onSuccess) => {
+  imgUploadForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    pristine.validate();
+    const isValid = pristine.validate();
+    if (isValid) {
+      uploadSubmit.disabled = true;
+      uploadSubmit.textContent = 'Публикую ...';
+      sendData(new FormData(evt.target))
+        .then(
+          () => {
+            showMessage('submitSuccess');
+            onSuccess();
+          }
+        )
+        .finally(
+          () => {
+            uploadSubmit.disabled = false;
+            uploadSubmit.textContent = 'Опубликовать';
+          }
+        );
+    }
+  });
+};
 
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -120,11 +143,28 @@ const closeUploadForm = () => {
   commentInput.value = '';
   pristine.reset();
 };
+const getPhotoPreview = (evt) => {
+  const fileName = evt.target.files[0].name;
+  const regularExpression = /^(.*\.(?=(png|bmp|jpeg|jpg|gif)$))?[^.]*$/i;
+  if (!fileName.match(regularExpression)) {
+    imgUploadPreview.src = 'img/upload-default-image.jpg';
+    showMessage('submitError');
+    closeUploadForm();
+    return;
+  }
+  const imgLoad = new FileReader();
+  imgLoad.addEventListener('load', (e) => {
+    imgUploadPreview.src = e.target.result;
+  });
+  imgLoad.readAsDataURL(evt.target.files[0]);
+};
 
-imgUploadInput.addEventListener('change', () => {
+imgUploadInput.addEventListener('change', (evt) => {
   openUploadForm();
+  getPhotoPreview(evt);
 });
 
 imgUploadCancel.addEventListener('click', () => {
   closeUploadForm();
 });
+export {setUserFormSubmit, closeUploadForm};

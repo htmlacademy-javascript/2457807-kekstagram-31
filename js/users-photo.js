@@ -3,7 +3,6 @@ const usersPictureList = document.querySelector('.pictures');
 const userPhotoPostTemplate = document.querySelector('#picture')
   .content
   .querySelector('.picture');
-const NUMBER_PHOTO_POSTS = 25;
 let usersPhotoPosts;
 
 const photoPost = (photo) => {
@@ -19,4 +18,5 @@ const photoPost = (photo) => {
   });
   usersPictureList.appendChild(photoPostListFragment);
 };
+
 export {usersPhotoPosts, usersPictureList, photoPost};

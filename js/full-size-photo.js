@@ -38,7 +38,7 @@ const showBigPicture = (evt) => {
     }
     commentsListFragment.appendChild(comment);
   });
-  commentsList.appendChild(commentsListFragment);  
+  commentsList.appendChild(commentsListFragment);
   commentLoader.classList.remove('hidden');
   document.body.classList.add('modal-open');
 };
