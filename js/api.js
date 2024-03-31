@@ -1,5 +1,6 @@
 import { photoPost} from './users-photo.js';
 import { showMessage } from './util.js';
+const photoFilters = document.querySelector('.img-filters');
 
 const NUMBER_PHOTO_POSTS = 25;
 const BASE_URL = 'https://31.javascript.htmlacademy.pro/kekstagram';
@@ -35,6 +36,8 @@ const sendData = (body) => load(Route.SEND_DATA, message.SEND_DATA_ERROR, Method
 getData()
   .then((photo) => {
     photoPost(photo.slice(0, NUMBER_PHOTO_POSTS));
+    photoFilters.classList.remove('img-filters--inactive');
+
   });
 
 export {getData, sendData};

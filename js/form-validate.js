@@ -3,7 +3,6 @@ import {isEscapeKey, showMessage } from './util.js';
 import { sendData } from './api.js';
 const MAX_HASHTAGS = 5;
 
-
 const imgUploadForm = document.querySelector('.img-upload__form');
 const imgUploadInput = imgUploadForm.querySelector('.img-upload__input');
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
@@ -14,6 +13,7 @@ const commentInput = document.querySelector('.text__description');
 const uploadSubmit = document.querySelector('.img-upload__submit');
 
 const imgUploadPreview = document.querySelector('.img-upload__preview').children[0];
+const imgEffectsPreview = document.querySelectorAll('.effects__preview');
 
 
 const pristine = new Pristine(imgUploadForm, {
@@ -155,6 +155,9 @@ const getPhotoPreview = (evt) => {
   const imgLoad = new FileReader();
   imgLoad.addEventListener('load', (e) => {
     imgUploadPreview.src = e.target.result;
+    for(let i = 0; i < imgEffectsPreview.length; i++){
+      imgEffectsPreview[i].style.backgroundImage = `url('${e.target.result}')`;
+    }
   });
   imgLoad.readAsDataURL(evt.target.files[0]);
 };
