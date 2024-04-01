@@ -42,7 +42,20 @@ const validateMaxNumberHashtags = (value) => {
   }
   return true;
 };
-
+const validateFormatHashtags = (value) => {
+  const regularExpression = /^#[а-яА-ЯёЁa-zA-Z0-9]{1,19}$/i;
+  const hashtags = getNumberhashtags(value);
+  for (const hashtag of hashtags) {
+    if (!regularExpression.test(hashtag)) {
+      uploadSubmit.disabled = true;
+      return false;
+    }
+  }
+  if (validateUniqueHashtags && validateMaxNumberHashtags) {
+    uploadSubmit.disabled = false;
+  }
+  return true;
+};
 const validateCommentMaxSymbol = (value) =>{
   if (value.length > 140) {
     uploadSubmit.disabled = true;
@@ -53,20 +66,6 @@ const validateCommentMaxSymbol = (value) =>{
     }
     return true;
   }
-};
-const validateFormatHashtags = (value) => {
-  const regularExpression = /^#[а-яА-ЯёЁa-zA-Z0-9]{1,19}$/i;
-  const hashtags = getNumberhashtags(value);
-  for (const hashtag of hashtags) {
-    if (!regularExpression.test(hashtag)) {
-      uploadSubmit.disabled = true;
-      return false;
-    }
-  }
-  if (validateUniqueHashtags && validateMaxNumberHashtags && validateCommentMaxSymbol) {
-    uploadSubmit.disabled = false;
-  }
-  return true;
 };
 
 pristine.addValidator(
@@ -115,17 +114,6 @@ const setUserFormSubmit = (onSuccess) => {
     }
   });
 };
-
-const onDocumentKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
-    if (document.activeElement === hashtagInput || document.activeElement === commentInput) {
-      return;
-    }
-    evt.preventDefault();
-    closeUploadForm();
-  }
-};
-
 const openUploadForm = () => {
   document.body.classList.add('modal-open');
   imgUploadOverlay.classList.remove('hidden');
@@ -143,6 +131,16 @@ const closeUploadForm = () => {
   commentInput.value = '';
   pristine.reset();
 };
+function onDocumentKeydown(evt){
+  if (isEscapeKey(evt)) {
+    if (document.activeElement === hashtagInput || document.activeElement === commentInput) {
+      return;
+    }
+    evt.preventDefault();
+    closeUploadForm();
+  }
+}
+
 const getPhotoPreview = (evt) => {
   const fileName = evt.target.files[0].name;
   const regularExpression = /^(.*\.(?=(png|bmp|jpeg|jpg|gif)$))?[^.]*$/i;

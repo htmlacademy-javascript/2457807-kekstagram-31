@@ -36,25 +36,7 @@ const makeRandomString = (string, length) => {
   return RandomString;
 };
 
-// function createRandomIdFromRangeGenerator(min, max) {
-//   const previousValues = [];
-
-//   return function () {
-//     let currentValue = getRandomInteger(min, max);
-//     if (previousValues.length >= (max - min + 1)) {
-//       console.error(`Перебраны все числа из диапазона от ${ min } до ${ max}`);
-//       return null;
-//     }
-//     while (previousValues.includes(currentValue)) {
-//       currentValue = getRandomInteger(min, max);
-//     }
-//     previousValues.push(currentValue);
-//     return currentValue;
-//   };
-// }
-
 const getMinutes = (string = '00:00') => {
-  // console.log((Number(string.split(':')[0])));
   if (isNaN(Number(string.split(':')[0])) || isNaN(Number(string.split(':')[1]))) {
     return -1;
   }
@@ -75,14 +57,4 @@ const checkMeeting = (startWorkDay = '8:30', endWorkDay = '17:30', startMeeting 
   }
   return false;
 };
-
-//console.log(checkMeeting('08:00', '17:30', '14:00', '90')); // true
-// console.log(checkMeeting('8:0', '10:0', '8:0', 120)); // true
-// console.log(checkMeeting('08:00', '14:30', '14:00', 90)); // false
-// console.log(checkMeeting('14:00', '17:30', '08:0', 90)); // false
-// console.log(checkMeeting('8:00', '17:30', '08:00', 900)); // false
-// console.log(checkMeeting('8:00', '-17:30', 'выа08:00', 900)); // false
-// console.log(checkMeeting('-8:00', '17:30', '08:00', 900)); // false
-// console.log(checkMeeting('8:0', '10:0', '8:0', -120)); // true
-// debugger;
-
+const checkLength = (string = '', maxSymbols = 1) => string.length <= maxSymbols;

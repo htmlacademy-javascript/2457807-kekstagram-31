@@ -18,10 +18,10 @@ const onDocumentCloseMessage = (evt) =>{
     closeMessageWindowForm(submitError); // скрываем элемент так клик был за его пределами
   }
 };
-const closeMessageWindowForm = (evt) => {
+function closeMessageWindowForm(evt){
   evt.remove();
   document.removeEventListener('click', onDocumentCloseMessage);
-};
+}
 
 const showMessage = (message) => {
   messages = message;
@@ -78,9 +78,6 @@ const throttle = (callback, delayBetweenFrames) =>{
     }
   };
 };
-
-
-const checkLength = (string = '', maxSymbols = 1) => string.length <= maxSymbols;
 const isEscapeKey = (evt) => evt.key === 'Escape';
 const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
