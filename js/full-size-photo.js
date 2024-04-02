@@ -83,7 +83,6 @@ const onDocumentKeydown = (evt) => {
   }
 };
 
-
 pictureCancel.addEventListener('click', () => {
   closeBigPicture();
 });
