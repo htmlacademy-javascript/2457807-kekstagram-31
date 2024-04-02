@@ -19,8 +19,8 @@ const FILTRES = {
 // Алгоритм тасование Фишера — Йетса. Суть заключается в том, чтобы проходить по массиву
 // в обратном порядке и менять местами каждый элемент со случайным элементом, который
 // находится перед ним.
-function getShufflePhoto(array, count = 10) {
-  const shuffleArray = [...array];
+const getShufflePhoto = (array, count = 10) => {
+  const shuffleArray = [...array];  
   for (let i = shuffleArray.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [shuffleArray[i], shuffleArray[j]] = [shuffleArray[j], shuffleArray[i]];
