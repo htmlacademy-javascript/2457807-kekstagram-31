@@ -1,4 +1,4 @@
-import { photoPost} from './users-photo.js';
+import { photoPost, saveApiPhoto} from './users-photo.js';
 import { showMessage } from './util.js';
 const photoFilters = document.querySelector('.img-filters');
 
@@ -35,6 +35,7 @@ const sendData = (body) => load(Route.SEND_DATA, message.SEND_DATA_ERROR, Method
 
 getData()
   .then((photo) => {
+    saveApiPhoto(photo.slice(0, NUMBER_PHOTO_POSTS));
     photoPost(photo.slice(0, NUMBER_PHOTO_POSTS));
     photoFilters.classList.remove('img-filters--inactive');
 
