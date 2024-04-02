@@ -1,7 +1,7 @@
 
 import { debounce } from './util.js';
 import { getUsersPhotoPosts, photoPost } from './users-photo.js';
-
+const TIMEOUT = 1000;
 
 const filtersForm = document.querySelector('.img-filters__form');
 const photoFilterButtons = document.querySelectorAll('.img-filters__button');
@@ -20,13 +20,13 @@ const FILTRES = {
 // в обратном порядке и менять местами каждый элемент со случайным элементом, который
 // находится перед ним.
 const getShufflePhoto = (array, count = 10) => {
-  const shuffleArray = [...array];  
+  const shuffleArray = [...array];
   for (let i = shuffleArray.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [shuffleArray[i], shuffleArray[j]] = [shuffleArray[j], shuffleArray[i]];
   }
   return shuffleArray.slice(0, count);
-}
+};
 
 const getDiscussedPhoto = (array) => {
   const discussedPhoto = [...array];
@@ -53,8 +53,7 @@ const changeFilterPhoto = (evt) => {
   if(evt.target.id === FILTRES.discussed){
     filteredPhoto = getDiscussedPhoto(getUsersPhotoPosts());
   }
-  debounce(photoPost, 1000)(filteredPhoto);
-  // photoPost(filteredPhoto);
+  debounce(photoPost, TIMEOUT)(filteredPhoto);
 };
 
 btnPhotoFilterDefault.addEventListener('click', (evt) => changeFilterPhoto(evt));
