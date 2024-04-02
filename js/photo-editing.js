@@ -8,10 +8,10 @@ const effectValue = photoEffectLevel.querySelector('.effect-level__value');
 const effectSlider = photoEffectLevel.querySelector('.effect-level__slider');
 const effectsList = document.querySelector('.effects__list');
 
-const MINSCALEVALUE = 25;
-const MAXSCALEVALUE = 100;
-const STEPSCALEVALUE = 25;
-const DEFAULTSCALEVALUE = 100;
+const MIN_SCALE_VALUE = 25;
+const MAX_SCALE_VALUE = 100;
+const STEP_SCALE_VALUE = 25;
+const DEFAULT_SCALE_VALUE = 100;
 let currentScale = 100;
 
 const photoEffects = {
@@ -24,27 +24,27 @@ const photoEffects = {
 };
 let currentEffect = 'ORIGINAL';
 
-const initScale = () => {
-  currentScale = 100;
-  setScale(DEFAULTSCALEVALUE);
-};
-
 const setScale = (scale) => {
-  scaleValue.value = `${scale }%`;
-  photoPreview.style.transform = `scale(${scale / MAXSCALEVALUE})`;
+  scaleValue.value = `${scale}%`;
+  photoPreview.style.transform = `scale(${scale / MAX_SCALE_VALUE})`;
 };
 const changeScaleValue = (stepvalue) => {
   currentScale += stepvalue;
-  if (currentScale > MAXSCALEVALUE) {
-    currentScale = MAXSCALEVALUE;
-  } else if (currentScale < MINSCALEVALUE) {
-    currentScale = MINSCALEVALUE;
+  if (currentScale > MAX_SCALE_VALUE) {
+    currentScale = MAX_SCALE_VALUE;
+  } else if (currentScale < MIN_SCALE_VALUE) {
+    currentScale = MIN_SCALE_VALUE;
   }
   setScale(currentScale);
 };
 
-btnScaleMinus.addEventListener('click', () => changeScaleValue(-STEPSCALEVALUE));
-btnScalePlus.addEventListener('click', () => changeScaleValue(STEPSCALEVALUE));
+const initScale = () => {
+  currentScale = 100;
+  setScale(DEFAULT_SCALE_VALUE);
+};
+
+btnScaleMinus.addEventListener('click', () => changeScaleValue(-STEP_SCALE_VALUE));
+btnScalePlus.addEventListener('click', () => changeScaleValue(STEP_SCALE_VALUE));
 
 ///////////////////////////////////////SLIDER/////////////////////////////////////////////////////
 noUiSlider.create(effectSlider, {
@@ -115,7 +115,4 @@ effectSlider.noUiSlider.on('update', (values) => {
 });
 
 
-export {
-  initScale,
-  initSlider
-};
+export {initScale, initSlider};
