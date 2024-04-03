@@ -3,7 +3,7 @@ import { showMessage } from './util.js';
 const photoFilters = document.querySelector('.img-filters');
 
 const NUMBER_PHOTO_POSTS = 25;
-const BASE_URL = 'https://31.javascript.htmlacademy.pro/kekstagra';
+const BASE_URL = 'https://31.javascript.htmlacademy.pro/kekstagram';
 const Route = {
   GET_DATA: '/data',
   SEND_DATA: ''
@@ -38,7 +38,6 @@ getData()
     saveApiPhoto(photo.slice(0, NUMBER_PHOTO_POSTS));
     photoPost(photo.slice(0, NUMBER_PHOTO_POSTS));
     photoFilters.classList.remove('img-filters--inactive');
-
   });
 
 export {getData, sendData};

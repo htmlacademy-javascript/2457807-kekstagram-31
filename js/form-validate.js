@@ -100,9 +100,11 @@ const setUserFormSubmit = (onSuccess) => {
       uploadSubmit.textContent = 'Публикую ...';
       sendData(new FormData(evt.target))
         .then(
-          () => {
-            showMessage('submitSuccess');
-            onSuccess();
+          (response) => {
+            if (!response.ok) {
+              showMessage('submitSuccess');
+              onSuccess();
+            }
           }
         )
         .finally(
