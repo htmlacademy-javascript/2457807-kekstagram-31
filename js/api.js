@@ -38,7 +38,6 @@ getData()
     saveApiPhoto(photo.slice(0, NUMBER_PHOTO_POSTS));
     photoPost(photo.slice(0, NUMBER_PHOTO_POSTS));
     photoFilters.classList.remove('img-filters--inactive');
-
   });
 
 export {getData, sendData};

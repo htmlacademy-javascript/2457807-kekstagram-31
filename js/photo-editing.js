@@ -1,3 +1,19 @@
+const MIN_SCALE_VALUE = 25;
+const MAX_SCALE_VALUE = 100;
+const STEP_SCALE_VALUE = 25;
+const DEFAULT_SCALE_VALUE = 100;
+
+const PhotoEffects = {
+  CHROME: 'chrome',
+  SEPIA: 'sepia',
+  MARVIN: 'marvin',
+  PHOBOS: 'phobos',
+  HEAT: 'heat',
+  ORIGINAL: 'none'
+};
+let currentScale = 100;
+let currentEffect = 'ORIGINAL';
+
 const scaleValue = document.querySelector('.scale__control--value');
 const btnScaleMinus = document.querySelector('.scale__control--smaller');
 const btnScalePlus = document.querySelector('.scale__control--bigger');
@@ -7,22 +23,6 @@ const photoEffectLevel = document.querySelector('.img-upload__effect-level');
 const effectValue = photoEffectLevel.querySelector('.effect-level__value');
 const effectSlider = photoEffectLevel.querySelector('.effect-level__slider');
 const effectsList = document.querySelector('.effects__list');
-
-const MIN_SCALE_VALUE = 25;
-const MAX_SCALE_VALUE = 100;
-const STEP_SCALE_VALUE = 25;
-const DEFAULT_SCALE_VALUE = 100;
-let currentScale = 100;
-
-const photoEffects = {
-  CHROME: 'chrome',
-  SEPIA: 'sepia',
-  MARVIN: 'marvin',
-  PHOBOS: 'phobos',
-  HEAT: 'heat',
-  ORIGINAL: 'none'
-};
-let currentEffect = 'ORIGINAL';
 
 const setScale = (scale) => {
   scaleValue.value = `${scale}%`;
@@ -78,31 +78,30 @@ const setPhotoEffect = (effect, value) => {
   currentEffect = effect;
   effectValue.value = value;
   switch (effect) {
-    case photoEffects.CHROME:
+    case PhotoEffects.CHROME:
       photoPreview.style.filter = `grayscale(${value / 100})`;
       break;
-    case photoEffects.SEPIA:
+    case PhotoEffects.SEPIA:
       photoPreview.style.filter = `sepia(${value / 100})`;
       break;
-    case photoEffects.MARVIN:
+    case PhotoEffects.MARVIN:
       photoPreview.style.filter = `invert(${value}%)`;
       break;
-    case photoEffects.PHOBOS:
+    case PhotoEffects.PHOBOS:
       photoPreview.style.filter = `blur(${value / 100 * 3}px)`;
       break;
-    case photoEffects.HEAT:
+    case PhotoEffects.HEAT:
       photoPreview.style.filter = `brightness(${value / 100 * 2 + 1})`;
       break;
-    case photoEffects.ORIGINAL:
+    case PhotoEffects.ORIGINAL:
       photoEffectLevel.classList.add('hidden');
       photoPreview.style.filter = '';
       break;
   }
-  if (effect !== photoEffects.ORIGINAL) {
+  if (effect !== PhotoEffects.ORIGINAL) {
     photoEffectLevel.classList.remove('hidden');
   }
 };
-
 
 effectsList.addEventListener('change', (evt) => {
   const effect = evt.target.value;
@@ -113,6 +112,5 @@ effectsList.addEventListener('change', (evt) => {
 effectSlider.noUiSlider.on('update', (values) => {
   setPhotoEffect(currentEffect, values);
 });
-
 
 export {initScale, initSlider};
