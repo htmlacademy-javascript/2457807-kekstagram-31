@@ -76,12 +76,12 @@ usersPictureList.addEventListener('click', (evt) => {
   openBigPicture(evt);
 });
 
-const onDocumentKeydown = (evt) => {
+function onDocumentKeydown(evt){
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     closeBigPicture();
   }
-};
+}
 
 pictureCancel.addEventListener('click', () => {
   closeBigPicture();
