@@ -34,9 +34,9 @@ const getData = () => load(Route.GET_DATA, message.GET_DATA_ERROR);
 const sendData = (body) => load(Route.SEND_DATA, message.SEND_DATA_ERROR, Method.POST, body);
 
 getData()
-  .then((photo) => {
-    saveApiPhoto(photo.slice(0, NUMBER_PHOTO_POSTS));
-    photoPost(photo.slice(0, NUMBER_PHOTO_POSTS));
+  .then((photos) => {
+    saveApiPhoto(photos.slice(0, NUMBER_PHOTO_POSTS));
+    photoPost(photos.slice(0, NUMBER_PHOTO_POSTS));
     photoFilters.classList.remove('img-filters--inactive');
 
   });

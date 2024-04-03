@@ -6,18 +6,18 @@ const picturesContainer = document.querySelector('.pictures');
 let usersPhotoPosts;
 
 const getUsersPhotoPosts = () => usersPhotoPosts;
-const saveApiPhoto = (photo) =>{
-  usersPhotoPosts = photo;
+const saveApiPhoto = (photos) =>{
+  usersPhotoPosts = photos;
   return usersPhotoPosts;
 };
 
-const photoPost = (photo) => {
+const photoPost = (photos) => {
   const pictures = picturesContainer.querySelectorAll('.picture');
   pictures.forEach((picture) => {
     picture.remove();
   });
   const photoPostListFragment = document.createDocumentFragment();
-  photo.forEach((element) => {
+  photos.forEach((element) => {
     const usersPhoto = userPhotoPostTemplate.cloneNode(true);
     usersPhoto.querySelector('.picture__img').src = element.url;
     usersPhoto.querySelector('.picture__img').alt = element.description;
