@@ -14,7 +14,7 @@ const STEP_SCALE_VALUE = 25;
 const DEFAULT_SCALE_VALUE = 100;
 let currentScale = 100;
 
-const photoEffects = {
+const PhotoEffects = {
   CHROME: 'chrome',
   SEPIA: 'sepia',
   MARVIN: 'marvin',
@@ -78,27 +78,27 @@ const setPhotoEffect = (effect, value) => {
   currentEffect = effect;
   effectValue.value = value;
   switch (effect) {
-    case photoEffects.CHROME:
+    case PhotoEffects.CHROME:
       photoPreview.style.filter = `grayscale(${value / 100})`;
       break;
-    case photoEffects.SEPIA:
+    case PhotoEffects.SEPIA:
       photoPreview.style.filter = `sepia(${value / 100})`;
       break;
-    case photoEffects.MARVIN:
+    case PhotoEffects.MARVIN:
       photoPreview.style.filter = `invert(${value}%)`;
       break;
-    case photoEffects.PHOBOS:
+    case PhotoEffects.PHOBOS:
       photoPreview.style.filter = `blur(${value / 100 * 3}px)`;
       break;
-    case photoEffects.HEAT:
+    case PhotoEffects.HEAT:
       photoPreview.style.filter = `brightness(${value / 100 * 2 + 1})`;
       break;
-    case photoEffects.ORIGINAL:
+    case PhotoEffects.ORIGINAL:
       photoEffectLevel.classList.add('hidden');
       photoPreview.style.filter = '';
       break;
   }
-  if (effect !== photoEffects.ORIGINAL) {
+  if (effect !== PhotoEffects.ORIGINAL) {
     photoEffectLevel.classList.remove('hidden');
   }
 };

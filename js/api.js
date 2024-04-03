@@ -27,6 +27,7 @@ const load = (route, messageText = null, method = Method.GET, body = null) =>
       return response.json();
     })
     .catch((err) => {
+      document. querySelector('.effects__list').classList.add('hidden');
       showMessage(messageText ?? err.message);
     });
 

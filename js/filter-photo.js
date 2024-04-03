@@ -10,7 +10,7 @@ const btnPhotoFilterShuffle = filtersForm.querySelector('#filter-random');
 const btnPhotoFilterDiscussed = filtersForm.querySelector('#filter-discussed');
 
 let currentFilter = 'filter-default';
-const FILTRES = {
+const Filtres = {
   default: 'filter-default',
   shuffle: 'filter-random',
   discussed: 'filter-discussed'
@@ -44,17 +44,16 @@ const changeFilterPhoto = (evt) => {
   });
   evt.target.classList.add('img-filters__button--active');
   let filteredPhoto;
-  if(evt.target.id === FILTRES.default){
+  if(evt.target.id === Filtres.default){
     filteredPhoto = getUsersPhotoPosts();
   }
-  if(evt.target.id === FILTRES.shuffle){
+  if(evt.target.id === Filtres.shuffle){
     filteredPhoto = getShufflePhoto(getUsersPhotoPosts());
   }
-  if(evt.target.id === FILTRES.discussed){
+  if(evt.target.id === Filtres.discussed){
     filteredPhoto = getDiscussedPhoto(getUsersPhotoPosts());
   }
-  debounce(photoPost, 1000)(filteredPhoto);
-  // photoPost(filteredPhoto);
+  debounce(photoPost, 500)(filteredPhoto); 
 };
 
 btnPhotoFilterDefault.addEventListener('click', (evt) => changeFilterPhoto(evt));
