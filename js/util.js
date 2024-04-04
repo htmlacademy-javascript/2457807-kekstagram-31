@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-
 const ERROR_SHOW_TIME = 5000;
 const dataLoadError = document.querySelector('#data-error')
   .content

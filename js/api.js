@@ -18,7 +18,6 @@ const Message = {
   SEND_DATA_SUCCESS: 'submitSuccess',
   SEND_DATA_ERROR: 'submitError'
 };
-
 const load = (route, messageText = null, method = Method.GET, body = null) =>
   fetch(`${BASE_URL}${route}`, {method, body})
     .then((response) => {
