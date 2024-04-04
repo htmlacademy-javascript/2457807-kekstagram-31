@@ -19,7 +19,8 @@ const showBigPicture = (evt) => {
   let count = 0;
   count = Number(evt.target.src.split('photos/')[1].replace(/[^ 0-9.]/g, ''));
   urlPicture.src = usersPhotoPosts[count - 1].url;
-  socialCaption.textContent = usersPhotoPosts[count - 1].alt;
+  urlPicture.alt = usersPhotoPosts[count - 1].description;
+  socialCaption.textContent = usersPhotoPosts[count - 1].description;
   likesCountPicture.textContent = usersPhotoPosts[count - 1].likes;
   commentTotalCount.textContent = usersPhotoPosts[count - 1].comments.length;
   commentShownCount.textContent = 5;
@@ -39,7 +40,9 @@ const showBigPicture = (evt) => {
     commentsListFragment.appendChild(comment);
   });
   commentsList.appendChild(commentsListFragment);
-  commentLoader.classList.remove('hidden');
+  if(Number(commentTotalCount.textContent) <= 5){
+    commentLoader.classList.add('hidden');
+  }
   document.body.classList.add('modal-open');
 };
 const showNextComments = () => {
@@ -67,6 +70,7 @@ const closeBigPicture = () => {
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
   commentLoader.removeEventListener('click', showNextComments);
+  commentLoader.classList.remove('hidden');
 };
 
 usersPictureList.addEventListener('click', (evt) => {

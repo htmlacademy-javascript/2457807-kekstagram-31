@@ -1,6 +1,6 @@
 import {initScale, initSlider} from './photo-editing.js';
-import {isEscapeKey, showMessage } from './util.js';
-import { sendData } from './api.js';
+import {isEscapeKey, showMessage, currentMessage } from './util.js';
+import {sendData } from './api.js';
 const MAX_HASHTAGS = 5;
 
 const imgUploadForm = document.querySelector('.img-upload__form');
@@ -134,6 +134,9 @@ const closeUploadForm = () => {
   pristine.reset();
 };
 function onDocumentKeydown(evt){
+  if(currentMessage === 'submitError'){
+    return;
+  }
   if (isEscapeKey(evt)) {
     if (document.activeElement === hashtagInput || document.activeElement === commentInput) {
       return;

@@ -11,6 +11,18 @@ const PhotoEffects = {
   HEAT: 'heat',
   ORIGINAL: 'none'
 };
+
+
+const scaleValue = document.querySelector('.scale__control--value');
+const btnScaleMinus = document.querySelector('.scale__control--smaller');
+const btnScalePlus = document.querySelector('.scale__control--bigger');
+const photoPreview = document.querySelector('.img-upload__preview');
+
+const photoEffectLevel = document.querySelector('.img-upload__effect-level');
+const effectValue = photoEffectLevel.querySelector('.effect-level__value');
+const effectSlider = photoEffectLevel.querySelector('.effect-level__slider');
+const effectsList = document.querySelector('.effects__list');
+
 let currentScale = 100;
 let currentEffect = 'ORIGINAL';
 

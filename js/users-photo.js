@@ -4,13 +4,11 @@ const userPhotoPostTemplate = document.querySelector('#picture')
   .querySelector('.picture');
 const picturesContainer = document.querySelector('.pictures');
 let usersPhotoPosts;
-
 const getUsersPhotoPosts = () => usersPhotoPosts;
 const saveApiPhoto = (photos) =>{
   usersPhotoPosts = photos;
   return usersPhotoPosts;
 };
-
 const photoPost = (photos) => {
   const pictures = picturesContainer.querySelectorAll('.picture');
   pictures.forEach((picture) => {
