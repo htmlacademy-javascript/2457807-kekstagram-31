@@ -101,7 +101,7 @@ const setUserFormSubmit = (onSuccess) => {
       sendData(new FormData(evt.target))
         .then(
           (response) => {
-            if(!response.ok){
+            if (!response.ok) {
               showMessage('submitSuccess');
               onSuccess();
             }
