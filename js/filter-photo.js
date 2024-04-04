@@ -1,6 +1,7 @@
 
 import { debounce } from './util.js';
 import { getUsersPhotoPosts, photoPost } from './users-photo.js';
+
 const TIMEOUT = 500;
 
 const Filtres = {
@@ -8,7 +9,6 @@ const Filtres = {
   SHUFFLE: 'filter-random',
   DISCUSSED: 'filter-discussed'
 };
-
 const filtersForm = document.querySelector('.img-filters__form');
 const photoFilterButtons = document.querySelectorAll('.img-filters__button');
 const btnPhotoFilterDefault = filtersForm.querySelector('#filter-default');
@@ -16,7 +16,7 @@ const btnPhotoFilterShuffle = filtersForm.querySelector('#filter-random');
 const btnPhotoFilterDiscussed = filtersForm.querySelector('#filter-discussed');
 let currentFilter = 'filter-default';
 
-// Алгоритм тасование Фишера — Йетса. Суть заключается в том, чтобы проходить по массиву
+// Алгоритм тасования Фишера — Йетса. Суть заключается в том, чтобы проходить по массиву
 // в обратном порядке и менять местами каждый элемент со случайным элементом, который
 // находится перед ним.
 const getShufflePhoto = (array, count = 10) => {

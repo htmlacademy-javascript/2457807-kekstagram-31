@@ -43,7 +43,6 @@ getData()
   .catch((err) => {
     document. querySelector('.effects__list').classList.add('hidden');
     throw new Error(`Произошла ошибка ${err.status}: ${err.statusText}`);
-
   });
 
 export {getData, sendData};

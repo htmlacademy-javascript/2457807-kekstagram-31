@@ -12,6 +12,7 @@ const PhotoEffects = {
   ORIGINAL: 'none'
 };
 
+
 const scaleValue = document.querySelector('.scale__control--value');
 const btnScaleMinus = document.querySelector('.scale__control--smaller');
 const btnScalePlus = document.querySelector('.scale__control--bigger');
@@ -24,6 +25,16 @@ const effectsList = document.querySelector('.effects__list');
 
 let currentScale = 100;
 let currentEffect = 'ORIGINAL';
+
+const scaleValue = document.querySelector('.scale__control--value');
+const btnScaleMinus = document.querySelector('.scale__control--smaller');
+const btnScalePlus = document.querySelector('.scale__control--bigger');
+const photoPreview = document.querySelector('.img-upload__preview');
+
+const photoEffectLevel = document.querySelector('.img-upload__effect-level');
+const effectValue = photoEffectLevel.querySelector('.effect-level__value');
+const effectSlider = photoEffectLevel.querySelector('.effect-level__slider');
+const effectsList = document.querySelector('.effects__list');
 
 const setScale = (scale) => {
   scaleValue.value = `${scale}%`;
@@ -104,7 +115,6 @@ const setPhotoEffect = (effect, value) => {
   }
 };
 
-
 effectsList.addEventListener('change', (evt) => {
   const effect = evt.target.value;
   effectSlider.noUiSlider.set(100);
@@ -114,6 +124,5 @@ effectsList.addEventListener('change', (evt) => {
 effectSlider.noUiSlider.on('update', (values) => {
   setPhotoEffect(currentEffect, values);
 });
-
 
 export {initScale, initSlider};
