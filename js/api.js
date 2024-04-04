@@ -36,14 +36,14 @@ const sendData = (body) => load(Route.SEND_DATA, message.SEND_DATA_ERROR, Method
 
 getData()
   .then((photo) => {
-    console.log(photo);
     saveApiPhoto(photo.slice(0, NUMBER_PHOTO_POSTS));
     photoPost(photo.slice(0, NUMBER_PHOTO_POSTS));
     photoFilters.classList.remove('img-filters--inactive');
   })
   .catch((err) => {
     document. querySelector('.effects__list').classList.add('hidden');
-    showMessage(messageText ?? err.message);
+    throw new Error(`Произошла ошибка ${err.status}: ${err.statusText}`);
+    // showMessage(messageText ?? err.message);
   });
 
 export {getData, sendData};

@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+
 const ERROR_SHOW_TIME = 5000;
 const dataLoadError = document.querySelector('#data-error')
   .content
@@ -9,12 +10,19 @@ const submitError = document.querySelector('#error')
 const submitSuccess = document.querySelector('#success')
   .content
   .querySelector('.success');
-let messages = '';
+let currentMessage = '';
+const isEscapeKey = (evt) => evt.key === 'Escape';
+const getRandomInteger = (a, b) => {
+  const lower = Math.ceil(Math.min(a, b));
+  const upper = Math.floor(Math.max(a, b));
+  const result = Math.random() * (upper - lower + 1) + lower;
+  return Math.floor(result);
+};
 const onDocumentCloseMessage = (evt) =>{
-  if (messages === 'submitSuccess' && (!evt.target.closest('.success__inner') || evt.target.closest('.success__button'))) {
+  if (currentMessage === 'submitSuccess' && (!evt.target.closest('.success__inner') || evt.target.closest('.success__button'))) {
     closeMessageWindowForm(submitSuccess); // скрываем элемент так клик был за его пределами
   }
-  if (messages === 'submitError' && (!evt.target.closest('.error__inner') || evt.target.closest('.error__button'))) {
+  if (currentMessage === 'submitError' && (!evt.target.closest('.error__inner') || evt.target.closest('.error__button'))) {
     closeMessageWindowForm(submitError); // скрываем элемент так клик был за его пределами
   }
 };
@@ -24,7 +32,7 @@ function closeMessageWindowForm(evt){
 }
 
 const showMessage = (message) => {
-  messages = message;
+  currentMessage = message;
   if(message === 'dataLoadError'){
     document.body.appendChild(dataLoadError);
     setTimeout(() => {
@@ -34,12 +42,26 @@ const showMessage = (message) => {
   if(message === 'submitSuccess'){
     document.body.appendChild(submitSuccess);
     document.addEventListener('click', onDocumentCloseMessage);
+    document.addEventListener('keydown', onDocumentKeydown);
   }
   if(message === 'submitError'){
     document.body.appendChild(submitError);
     document.addEventListener('click', onDocumentCloseMessage);
+    document.addEventListener('keydown', onDocumentKeydown);
   }
 };
+function onDocumentKeydown(evt){
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    if(currentMessage === 'submitSuccess'){
+      submitSuccess.remove();
+    }
+    if(currentMessage === 'submitError'){
+      submitError.remove();
+    }
+  }
+  document.removeEventListener('keydown', onDocumentKeydown);
+}
 const debounce = (callback, timeoutDelay = 500) =>{
   // Используем замыкания, чтобы id таймаута у нас навсегда приклеился
   // к возвращаемой функции с setTimeout, тогда мы его сможем перезаписывать
@@ -78,13 +100,6 @@ const throttle = (callback, delayBetweenFrames) =>{
     }
   };
 };
-const isEscapeKey = (evt) => evt.key === 'Escape';
-const getRandomInteger = (a, b) => {
-  const lower = Math.ceil(Math.min(a, b));
-  const upper = Math.floor(Math.max(a, b));
-  const result = Math.random() * (upper - lower + 1) + lower;
-  return Math.floor(result);
-};
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 const initId = () => {
   let id = 0;
@@ -94,5 +109,5 @@ const initId = () => {
   };
 };
 
-export {getRandomInteger, getRandomArrayElement, initId, isEscapeKey, showMessage, debounce, throttle};
+export {getRandomInteger, getRandomArrayElement, initId, isEscapeKey, showMessage, debounce, throttle, currentMessage};
 
