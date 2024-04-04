@@ -3,17 +3,17 @@ import { debounce } from './util.js';
 import { getUsersPhotoPosts, photoPost } from './users-photo.js';
 const TIMEOUT = 500;
 
+const Filtres = {
+  DEFAULT: 'filter-default',
+  SHUFFLE: 'filter-random',
+  DISCUSSED: 'filter-discussed'
+};
+
 const filtersForm = document.querySelector('.img-filters__form');
 const photoFilterButtons = document.querySelectorAll('.img-filters__button');
 const btnPhotoFilterDefault = filtersForm.querySelector('#filter-default');
 const btnPhotoFilterShuffle = filtersForm.querySelector('#filter-random');
 const btnPhotoFilterDiscussed = filtersForm.querySelector('#filter-discussed');
-
-const Filtres = {
-  default: 'filter-default',
-  shuffle: 'filter-random',
-  discussed: 'filter-discussed'
-};
 let currentFilter = 'filter-default';
 
 // Алгоритм тасование Фишера — Йетса. Суть заключается в том, чтобы проходить по массиву
@@ -44,13 +44,13 @@ const changeFilterPhoto = (evt) => {
   });
   evt.target.classList.add('img-filters__button--active');
   let filteredPhoto;
-  if(evt.target.id === Filtres.default){
+  if(evt.target.id === Filtres.DEFAULT){
     filteredPhoto = getUsersPhotoPosts();
   }
-  if(evt.target.id === Filtres.shuffle){
+  if(evt.target.id === Filtres.SHUFFLE){
     filteredPhoto = getShufflePhoto(getUsersPhotoPosts());
   }
-  if(evt.target.id === Filtres.discussed){
+  if(evt.target.id === Filtres.DISCUSSED){
     filteredPhoto = getDiscussedPhoto(getUsersPhotoPosts());
   }
   debounce(photoPost, TIMEOUT)(filteredPhoto);

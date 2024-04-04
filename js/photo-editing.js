@@ -1,3 +1,17 @@
+const MIN_SCALE_VALUE = 25;
+const MAX_SCALE_VALUE = 100;
+const STEP_SCALE_VALUE = 25;
+const DEFAULT_SCALE_VALUE = 100;
+
+const PhotoEffects = {
+  CHROME: 'chrome',
+  SEPIA: 'sepia',
+  MARVIN: 'marvin',
+  PHOBOS: 'phobos',
+  HEAT: 'heat',
+  ORIGINAL: 'none'
+};
+
 const scaleValue = document.querySelector('.scale__control--value');
 const btnScaleMinus = document.querySelector('.scale__control--smaller');
 const btnScalePlus = document.querySelector('.scale__control--bigger');
@@ -8,20 +22,7 @@ const effectValue = photoEffectLevel.querySelector('.effect-level__value');
 const effectSlider = photoEffectLevel.querySelector('.effect-level__slider');
 const effectsList = document.querySelector('.effects__list');
 
-const MIN_SCALE_VALUE = 25;
-const MAX_SCALE_VALUE = 100;
-const STEP_SCALE_VALUE = 25;
-const DEFAULT_SCALE_VALUE = 100;
 let currentScale = 100;
-
-const PhotoEffects = {
-  CHROME: 'chrome',
-  SEPIA: 'sepia',
-  MARVIN: 'marvin',
-  PHOBOS: 'phobos',
-  HEAT: 'heat',
-  ORIGINAL: 'none'
-};
 let currentEffect = 'ORIGINAL';
 
 const setScale = (scale) => {

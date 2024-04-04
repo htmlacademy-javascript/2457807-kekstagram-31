@@ -1,5 +1,5 @@
 import {usersPhotoPosts, usersPictureList} from './users-photo.js';
-import {isEscapeKey, currentMessage} from './util.js';
+import {isEscapeKey} from './util.js';
 
 const userPictureOpen = document.querySelector('.big-picture');
 const urlPicture = userPictureOpen.querySelector('.big-picture__img').children[0];
@@ -81,9 +81,6 @@ usersPictureList.addEventListener('click', (evt) => {
 });
 
 function onDocumentKeydown(evt){
-  if(currentMessage === 'submitError'){
-    return;
-  }
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     closeBigPicture();
