@@ -27,7 +27,6 @@ const load = (route, messageText = null, method = Method.GET, body = null) =>
       return response.json();
     })
     .catch((err) => {
-      document. querySelector('.effects__list').classList.add('hidden');
       showMessage(messageText ?? err.message);
     });
 
@@ -41,7 +40,6 @@ getData()
     photoFilters.classList.remove('img-filters--inactive');
   })
   .catch((err) => {
-    document. querySelector('.effects__list').classList.add('hidden');
     throw new Error(`Произошла ошибка ${err.status}: ${err.statusText}`);
   });
 
