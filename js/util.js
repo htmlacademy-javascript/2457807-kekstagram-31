@@ -28,6 +28,7 @@ const onDocumentCloseMessage = (evt) =>{
 function closeMessageWindowForm(evt){
   evt.remove();
   document.removeEventListener('click', onDocumentCloseMessage);
+  document.removeEventListener('keydown', onDocumentKeydown);
 }
 
 const showMessage = (message) => {
@@ -61,6 +62,7 @@ function onDocumentKeydown(evt){
     }
   }
   document.removeEventListener('keydown', onDocumentKeydown);
+  document.removeEventListener('click', onDocumentCloseMessage);
   currentMessage = '';
 }
 const debounce = (callback, timeoutDelay = 500) =>{

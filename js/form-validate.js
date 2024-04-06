@@ -104,6 +104,7 @@ const setUserFormSubmit = (onSuccess) => {
             if (!response.ok) {
               showMessage('submitSuccess');
               onSuccess();
+              document.removeEventListener('click', onDocumentKeydown);
             }
           }
         )
