@@ -1,4 +1,4 @@
-import {usersPhotoPosts} from './users-photo.js';
+import {getUsersPhotoPosts} from './users-photo.js';
 import {isEscapeKey} from './util.js';
 
 const userPictureOpen = document.querySelector('.big-picture');
@@ -17,19 +17,20 @@ const pictureCancel = userPictureOpen.querySelector('#picture-cancel');
 
 const showBigPicture = (evt) => {
   let count = 0;
+  const usersPhotos = getUsersPhotoPosts();
   count = Number(evt.target.src.split('photos/')[1].replace(/[^ 0-9.]/g, ''));
-  urlPicture.src = usersPhotoPosts[count - 1].url;
-  urlPicture.alt = usersPhotoPosts[count - 1].description;
-  socialCaption.textContent = usersPhotoPosts[count - 1].description;
-  likesCountPicture.textContent = usersPhotoPosts[count - 1].likes;
-  commentTotalCount.textContent = usersPhotoPosts[count - 1].comments.length;
+  urlPicture.src = usersPhotos[count - 1].url;
+  urlPicture.alt = usersPhotos[count - 1].description;
+  socialCaption.textContent = usersPhotos[count - 1].description;
+  likesCountPicture.textContent = usersPhotos[count - 1].likes;
+  commentTotalCount.textContent = usersPhotos[count - 1].comments.length;
   commentShownCount.textContent = 5;
-  if (usersPhotoPosts[count - 1].comments.length < 5) {
-    commentShownCount.textContent = usersPhotoPosts[count - 1].comments.length;
+  if (usersPhotos[count - 1].comments.length < 5) {
+    commentShownCount.textContent = usersPhotos[count - 1].comments.length;
   }
   const commentsListFragment = document.createDocumentFragment();
   commentsList.innerHTML = '';
-  usersPhotoPosts[count - 1].comments.forEach((element, index) => {
+  usersPhotos[count - 1].comments.forEach((element, index) => {
     const comment = commentTemplate.cloneNode(true);
     comment.querySelector('.social__picture').src = element.avatar;
     comment.querySelector('.social__picture').alt = element.name;
@@ -73,12 +74,6 @@ const closeBigPicture = () => {
   commentLoader.classList.remove('hidden');
 };
 
-// usersPictureList.addEventListener('click', (evt) => {
-//   if (evt.target.classList.value !== 'picture__img') {
-//     return;
-//   }
-//   openBigPicture(evt);
-// });
 const addPictureListener = (evt) => {
   if (evt.target.classList.value !== 'picture__img') {
     return;

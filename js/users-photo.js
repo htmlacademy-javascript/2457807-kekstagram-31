@@ -9,7 +9,7 @@ const saveApiPhoto = (photos) =>{
   usersPhotoPosts = photos;
   return usersPhotoPosts;
 };
-const photoPost = (photos) => {
+const createPhotoPost = (photos) => {
   const pictures = picturesContainer.querySelectorAll('.picture');
   pictures.forEach((picture) => {
     picture.remove();
@@ -26,4 +26,4 @@ const photoPost = (photos) => {
   usersPictureList.appendChild(photoPostListFragment);
 };
 
-export {usersPhotoPosts, usersPictureList, photoPost, saveApiPhoto, getUsersPhotoPosts};
+export {usersPictureList, createPhotoPost, saveApiPhoto, getUsersPhotoPosts};
