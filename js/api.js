@@ -1,5 +1,6 @@
-import { photoPost, saveApiPhoto} from './users-photo.js';
+import { photoPost, saveApiPhoto, usersPictureList} from './users-photo.js';
 import { showMessage } from './util.js';
+import { addPictureListener } from './full-size-photo.js';
 
 const photoFilters = document.querySelector('.img-filters');
 
@@ -27,7 +28,6 @@ const load = (route, messageText = null, method = Method.GET, body = null) =>
       return response.json();
     })
     .catch((err) => {
-      document. querySelector('.effects__list').classList.add('hidden');
       showMessage(messageText ?? err.message);
     });
 
@@ -39,9 +39,9 @@ getData()
     saveApiPhoto(photo.slice(0, NUMBER_PHOTO_POSTS));
     photoPost(photo.slice(0, NUMBER_PHOTO_POSTS));
     photoFilters.classList.remove('img-filters--inactive');
+    usersPictureList.addEventListener('click', addPictureListener);
   })
   .catch((err) => {
-    document. querySelector('.effects__list').classList.add('hidden');
     throw new Error(`Произошла ошибка ${err.status}: ${err.statusText}`);
   });
 

@@ -1,4 +1,4 @@
-import {usersPhotoPosts, usersPictureList} from './users-photo.js';
+import {usersPhotoPosts} from './users-photo.js';
 import {isEscapeKey} from './util.js';
 
 const userPictureOpen = document.querySelector('.big-picture');
@@ -73,12 +73,18 @@ const closeBigPicture = () => {
   commentLoader.classList.remove('hidden');
 };
 
-usersPictureList.addEventListener('click', (evt) => {
+// usersPictureList.addEventListener('click', (evt) => {
+//   if (evt.target.classList.value !== 'picture__img') {
+//     return;
+//   }
+//   openBigPicture(evt);
+// });
+const addPictureListener = (evt) => {
   if (evt.target.classList.value !== 'picture__img') {
     return;
   }
   openBigPicture(evt);
-});
+};
 
 function onDocumentKeydown(evt){
   if (isEscapeKey(evt)) {
@@ -90,3 +96,5 @@ function onDocumentKeydown(evt){
 pictureCancel.addEventListener('click', () => {
   closeBigPicture();
 });
+
+export {addPictureListener};

@@ -104,9 +104,13 @@ const setUserFormSubmit = (onSuccess) => {
             if (!response.ok) {
               showMessage('submitSuccess');
               onSuccess();
+              document.removeEventListener('click', onDocumentKeydown);
             }
           }
         )
+        .catch((err) => {
+          throw new Error(`Произошла ошибка ${err.status}: ${err.statusText}`);
+        })
         .finally(
           () => {
             uploadSubmit.disabled = false;
