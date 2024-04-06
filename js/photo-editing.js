@@ -12,7 +12,6 @@ const PhotoEffects = {
   ORIGINAL: 'none'
 };
 
-
 const scaleValue = document.querySelector('.scale__control--value');
 const btnScaleMinus = document.querySelector('.scale__control--smaller');
 const btnScalePlus = document.querySelector('.scale__control--bigger');

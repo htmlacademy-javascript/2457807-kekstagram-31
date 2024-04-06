@@ -10,13 +10,16 @@ const submitSuccess = document.querySelector('#success')
   .content
   .querySelector('.success');
 let currentMessage = '';
+
 const isEscapeKey = (evt) => evt.key === 'Escape';
+
 const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
   const upper = Math.floor(Math.max(a, b));
   const result = Math.random() * (upper - lower + 1) + lower;
   return Math.floor(result);
 };
+
 const onDocumentCloseMessage = (evt) =>{
   if (currentMessage === 'submitSuccess' && (!evt.target.closest('.success__inner') || evt.target.closest('.success__button'))) {
     closeMessageWindowForm(submitSuccess); // скрываем элемент так клик был за его пределами
@@ -25,6 +28,7 @@ const onDocumentCloseMessage = (evt) =>{
     closeMessageWindowForm(submitError); // скрываем элемент так клик был за его пределами
   }
 };
+
 function closeMessageWindowForm(evt){
   evt.remove();
   document.removeEventListener('click', onDocumentCloseMessage);
@@ -65,6 +69,7 @@ function onDocumentKeydown(evt){
   document.removeEventListener('click', onDocumentCloseMessage);
   currentMessage = '';
 }
+
 const debounce = (callback, timeoutDelay = 500) =>{
   let timeoutId;
   return (...rest) => {
@@ -83,6 +88,7 @@ const throttle = (callback, delayBetweenFrames) =>{
     }
   };
 };
+
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 const initId = () => {
   let id = 0;

@@ -1,19 +1,19 @@
 
 import { debounce } from './util.js';
-import { getUsersPhotoPosts, photoPost } from './users-photo.js';
+import { getUsersPhotoPosts, createPhotoPost } from './users-photo.js';
 
 const TIMEOUT = 500;
-
 const Filtres = {
   DEFAULT: 'filter-default',
   SHUFFLE: 'filter-random',
   DISCUSSED: 'filter-discussed'
 };
 const filtersForm = document.querySelector('.img-filters__form');
-const photoFilterButtons = document.querySelectorAll('.img-filters__button');
+const photoFilterButtons = filtersForm.querySelectorAll('.img-filters__button');
 const btnPhotoFilterDefault = filtersForm.querySelector('#filter-default');
 const btnPhotoFilterShuffle = filtersForm.querySelector('#filter-random');
 const btnPhotoFilterDiscussed = filtersForm.querySelector('#filter-discussed');
+
 let currentFilter = 'filter-default';
 
 // Алгоритм тасования Фишера — Йетса. Суть заключается в том, чтобы проходить по массиву
@@ -29,9 +29,9 @@ const getShufflePhoto = (array, count = 10) => {
 };
 
 const getDiscussedPhoto = (array) => {
-  const discussedPhoto = [...array];
-  discussedPhoto.sort((a, b) => b.comments.length - a.comments.length);
-  return discussedPhoto;
+  const discussedPhotos = [...array];
+  discussedPhotos.sort((a, b) => b.comments.length - a.comments.length);
+  return discussedPhotos;
 };
 
 const changeFilterPhoto = (evt) => {
@@ -53,7 +53,7 @@ const changeFilterPhoto = (evt) => {
   if(evt.target.id === Filtres.DISCUSSED){
     filteredPhoto = getDiscussedPhoto(getUsersPhotoPosts());
   }
-  debounce(photoPost, TIMEOUT)(filteredPhoto);
+  debounce(createPhotoPost, TIMEOUT)(filteredPhoto);
 };
 
 btnPhotoFilterDefault.addEventListener('click', (evt) => changeFilterPhoto(evt));
