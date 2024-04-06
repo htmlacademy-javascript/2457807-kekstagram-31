@@ -44,6 +44,7 @@ const showMessage = (message) => {
     document.addEventListener('keydown', onDocumentKeydown);
   }
   if(message === 'submitError'){
+    currentMessage = 'submitError';
     document.body.appendChild(submitError);
     document.addEventListener('click', onDocumentCloseMessage);
     document.addEventListener('keydown', onDocumentKeydown);
@@ -59,6 +60,8 @@ function onDocumentKeydown(evt){
       submitError.remove();
     }
   }
+  document.removeEventListener('keydown', onDocumentKeydown);
+  currentMessage = '';
 }
 const debounce = (callback, timeoutDelay = 500) =>{
   let timeoutId;
