@@ -4,7 +4,7 @@ import { showMessage } from './util.js';
 const photoFilters = document.querySelector('.img-filters');
 
 const NUMBER_PHOTO_POSTS = 25;
-const BASE_URL = 'https://31.javascript.htmlacademy.pro/kekstagra';
+const BASE_URL = 'https://31.javascript.htmlacademy.pro/kekstagram';
 const Route = {
   GET_DATA: '/data',
   SEND_DATA: ''
