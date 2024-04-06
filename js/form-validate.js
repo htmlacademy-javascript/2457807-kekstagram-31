@@ -107,6 +107,9 @@ const setUserFormSubmit = (onSuccess) => {
             }
           }
         )
+        .catch((err) => {
+          throw new Error(`Произошла ошибка ${err.status}: ${err.statusText}`);
+        })
         .finally(
           () => {
             uploadSubmit.disabled = false;
